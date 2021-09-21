@@ -12,14 +12,14 @@ app = Flask(__name__)
 def hello_world():
     request_type_str = request.method
     if request_type_str == 'GET':
-        return render_template('index.html', href='/app/static/base_pic.svg')
+        return render_template('index.html', href='app/static/base_pic.svg')
     else:
         text = request.form['text']
         random_string = uuid.uuid4().hex
-        path = "/app/static/" + random_string + ".svg"
-        model = load('/app/model.joblib')
+        path = "app/static/" + random_string + ".svg"
+        model = load('app/model.joblib')
         np_arr = floats_string_to_np_arr(text)
-        make_picture('/app/AgesAndHeights.pkl', model, np_arr, path)
+        make_picture('app/AgesAndHeights.pkl', model, np_arr, path)
         return render_template('index.html', href=path[4:)
 
 def make_picture(training_data_filename, model, new_inp_np_arr, output_file):
